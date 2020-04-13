@@ -19,8 +19,8 @@ env_info = env.reset(train_mode=False)[brain_name]     # reset the environment
 states = env_info.vector_observations                  # get the current state (for each agent)
 scores = np.zeros(num_agents)                          # initialize the score (for each agent)
 agent = Agent(state_size, action_size, 1245)
-agent.actor_local = torch.load_state_dict('checkpoint_actor.pth')
-agent.critic_local = torch.load_state_dict('checkpoint_critic.pth')
+agent.actor_local.load_state_dict(torch.load('checkpoint_actor.pth'))
+agent.critic_local.load_state_dict(torch.load('checkpoint_critic.pth'))
 while True:
     actions = agent.act(states)                        # select an action (for each agent)
     actions = np.clip(actions, -1, 1)                  # all actions between -1 and 1
